@@ -1,5 +1,7 @@
-﻿using OpenQA.Selenium;
+﻿using Alura.LeilaoOnline.Selenium.Helpers;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,31 +30,15 @@ namespace Alura.LeilaoOnline.Selenium.PageObjects
 
         public void PesquisarLeiloes(List<string> categorias)
         {
-            var selectWrapper = driver.FindElement(bySelectCategorias);
-            selectWrapper.Click();
+            var select = new SelectMaterialize(driver, bySelectCategorias);
+            select.DeselectAll();
 
-            var opcoes = selectWrapper.FindElements(By.CssSelector("li>span")).ToList();
-
-            Thread.Sleep(5000);
-            opcoes.ForEach(o =>
-            {
-                o.Click();
-            });
-            Thread.Sleep(5000);
+            Thread.Sleep(2000);
 
             categorias.ForEach(categ =>
             {
-                opcoes.Where(o => o.Text.Contains(categ))
-                .ToList()
-                .ForEach(o =>
-                {
-                    o.Click();
-                });
+                select.SelectByText(categ);
             });
-            Thread.Sleep(5000);
-
-            selectWrapper.FindElement(By.TagName("li"))
-                .SendKeys(Keys.Tab);
         }
 
         internal void EfetuarLogout()
