@@ -37,7 +37,7 @@ namespace Alura.LeilaoOnline.Selenium.PageObjects
 
             categorias.ForEach(categ =>
             {
-                select.SelectByText(categ);
+                select.MultipleSelectByText(categ);
             });
         }
 

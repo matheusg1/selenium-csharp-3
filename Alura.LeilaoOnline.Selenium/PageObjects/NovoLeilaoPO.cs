@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Alura.LeilaoOnline.Selenium.Helpers;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -23,6 +24,7 @@ namespace Alura.LeilaoOnline.Selenium.PageObjects
         private By byInputTerminoPregao;
         private By byBotaoSalvar;
         private By byInputCategoriaItemCollection;
+        private By bySelectCategorias;
 
         public NovoLeilaoPO(IWebDriver driver)
         {
@@ -35,20 +37,22 @@ namespace Alura.LeilaoOnline.Selenium.PageObjects
             byInputInicioPregao = By.Id("InicioPregao");
             byInputTerminoPregao = By.Id("TerminoPregao");
             byBotaoSalvar = By.CssSelector("button[type=submit]");
+            bySelectCategorias = By.ClassName("select-wrapper");
         }
         //Select
-        /*
+       
         public IEnumerable<string> Categorias
         {
             get
             {
-                var elementoCategoria = new SelectElement(driver.FindElement(By.byInputCategoria));
-                elementoCategoria
+                var elementoCategoria = new SelectMaterialize(driver, bySelectCategorias);
+                
+                return elementoCategoria
                     .Options
                     .Where(o => o.Enabled)
                     .Select(o => o.Text);
             }
-        }*/
+        }
 
         public void Visitar()
         {
@@ -59,15 +63,22 @@ namespace Alura.LeilaoOnline.Selenium.PageObjects
         {
             driver.FindElement(byInputTitulo).SendKeys(titulo);
             driver.FindElement(byInputDescricao).SendKeys(descricao);
-            byInputCategoriaItemCollection = By.XPath("//*[contains(@class,'dropdown-content select-dropdown')]/li[2]/span");
-            //driver.FindElement(byInputCategoria).GetAttribute($"option[value={categoria}]");            
+            //byInputCategoriaItemCollection = By.XPath("//*[contains(@class,'dropdown-content select-dropdown')]/li[2]/span");            
             driver.FindElement(By.ClassName("select-wrapper")).Click();
-            Thread.Sleep(1000);
-            driver.FindElement(byInputCategoriaItemCollection).Click();
+            SelecionarCategoria(categoria);
+            Thread.Sleep(1000);            
             driver.FindElement(byInputValorInicial).SendKeys(valor.ToString());
             driver.FindElement(byInputImagem).SendKeys(imagem);
             driver.FindElement(byInputInicioPregao).SendKeys(inicio.ToString("d"));
             driver.FindElement(byInputTerminoPregao).SendKeys(termino.ToString("d"));
+        }
+
+        public void SelecionarCategoria(string categoria)
+        {
+            var select = new SelectMaterialize(driver, bySelectCategorias);
+            select.OpenWrapper();
+            var opcaoSelecionada = select.Options.FirstOrDefault(o => o.Text.Contains(categoria));
+            opcaoSelecionada.Click();            
         }
 
         public void SubmeteFormulario()

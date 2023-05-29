@@ -24,7 +24,7 @@ namespace Alura.LeilaoOnline.Selenium.Helpers
             opcoes = selectWrapper.FindElements(By.CssSelector("li>span"));
         }
 
-        private void OpenWrapper()
+        public void OpenWrapper()
         {
             selectWrapper.Click();
         }
@@ -47,12 +47,12 @@ namespace Alura.LeilaoOnline.Selenium.Helpers
             LoseFocus();
         }
 
-        public void SelectByText(string option)
+        public void MultipleSelectByText(string option)
         {
             OpenWrapper();
             Thread.Sleep(1000);
 
-            var listaFiltrada = opcoes.Where(o => o.Text.Contains(option)).ToList();
+            var listaFiltrada = opcoes.Where(o => o.Text.Contains(option)).ToList();           
 
             listaFiltrada
             .ForEach(o =>

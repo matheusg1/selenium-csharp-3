@@ -33,7 +33,7 @@ namespace Alura.LeilaoOnline.Selenium.Testes
             loginPO.SubmeteFormulario();
 
             var novoLeilaoPO = new NovoLeilaoPO(driver);
-            novoLeilaoPO.Visitar();
+            novoLeilaoPO.Visitar();            
 
             novoLeilaoPO.PreencheFormulario("Leilão de Coleção 1",
                 "Nullam",
