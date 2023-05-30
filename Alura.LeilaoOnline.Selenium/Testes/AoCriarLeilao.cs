@@ -16,7 +16,6 @@ namespace Alura.LeilaoOnline.Selenium.Testes
     public class AoCriarLeilao
     {
         private IWebDriver driver;
-        private By s;
 
         public AoCriarLeilao(TestFixture fixture)
         {
@@ -42,7 +41,7 @@ namespace Alura.LeilaoOnline.Selenium.Testes
                 "C:\\Users\\Matheus\\Pictures\\1222.png",
                 DateTime.Now.AddDays(20),
                 DateTime.Now.AddDays(40));
-            Thread.Sleep(5000);
+            Thread.Sleep(1000);
 
             //Act
             novoLeilaoPO.SubmeteFormulario();

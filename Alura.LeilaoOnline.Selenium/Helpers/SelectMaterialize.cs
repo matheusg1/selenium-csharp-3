@@ -60,7 +60,6 @@ namespace Alura.LeilaoOnline.Selenium.Helpers
                     o.Click();
                 }
             );
-            Thread.Sleep(1000);
             LoseFocus();
         }
     }
