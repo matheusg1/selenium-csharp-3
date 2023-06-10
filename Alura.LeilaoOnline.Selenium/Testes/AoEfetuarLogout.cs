@@ -31,7 +31,7 @@ namespace Alura.LeilaoOnline.Selenium.Testes
             var dashboardPO = new DashboardInteressadaPO(driver);
 
             //Act
-            dashboardPO.EfetuarLogout();
+            dashboardPO.MenuLogado.EfetuarLogout();
 
             //Assert
             Assert.Contains("Próximos Leilões", driver.PageSource);            

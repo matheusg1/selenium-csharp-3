@@ -33,7 +33,7 @@ namespace Alura.LeilaoOnline.Selenium.Testes
             var dashboardInteressadaPO = new DashboardInteressadaPO(driver);
 
             //Act
-            dashboardInteressadaPO.PesquisarLeiloes(
+            dashboardInteressadaPO.Filtro.PesquisarLeiloes(
                 new List<string>
                     {
                         "Arte",
